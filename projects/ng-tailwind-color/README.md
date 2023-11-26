@@ -44,13 +44,13 @@ Resolve color with pipe
 import {TailwindService} from '@fusoionic/ng-tailwind-color';
 
 export class AppComponent implements OnInit {
-    constructor(
-        private twService: TailwindService,
-    ){}
-  
-    ngOnInit(){
-      this.twService.resolve('red-500').darken(50).toHex();
-    }
+  constructor(
+    private twService: TailwindService,
+  ){}
+
+  ngOnInit(){
+    this.twService.resolve('red-500').darken(50).toHex();
+  }
 }
 
 ```
