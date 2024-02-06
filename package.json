@@ -1,6 +1,6 @@
 {
   "name": "@fusoionic/ng-tailwind-color",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -19,8 +19,8 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
+    "@thebespokepixel/es-tinycolor": "^3.1.0",
     "rxjs": "~7.8.0",
-    "tinycolor2": "^1.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
   },
@@ -29,7 +29,6 @@
     "@angular/cli": "^17.0.3",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
-    "@types/tinycolor2": "^1.4.6",
     "barrelsby": "^2.8.1",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",

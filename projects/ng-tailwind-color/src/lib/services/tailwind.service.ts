@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {TAILWIND_COLORS} from "../data/tailwind-color.data";
-import {TWColorData} from "../interfaces/tailwind-internal.interface";
-import tinyColor, {Instance as TinyColor} from 'tinycolor2';
+import {TWColorData, TWNil} from "../interfaces/tailwind-internal.interface";
+import {TinyColor, tinycolor} from "@thebespokepixel/es-tinycolor";
 import {TWColor, TWColorTone} from "../interfaces/tailwind-color.interface";
 import {TWFindOptions, TWInvertOptions, TWRandomOptions} from "../interfaces/tailwind-options.interface";
 import {TailwindColor} from "../models/tailwind-color.model";
@@ -45,7 +45,7 @@ export class TailwindService {
     // add colors
     this.colorNames.filter(name => opts.colors.includes(name)).map(name => {
       (Object.keys(this.colors[name]) as unknown as TWColorTone[]).filter((tone) => this.colorTones.includes(parseInt(tone as any) as any)).map(tone => {
-        colors.push(new TailwindColor(tinyColor(this.colors[name][tone])));
+        colors.push(new TailwindColor(tinycolor(this.colors[name][tone], {})));
       });
     });
 
@@ -55,7 +55,7 @@ export class TailwindService {
   }
 
   /** Resolves a color */
-  resolve(color?: TWColor|null, fallback?: TWColor|null): TailwindColor|null {
+  resolve(color?: TWNil<TWColor>, fallback?: TWNil<TWColor>): TailwindColor|null {
     const c = parseColor(color) || parseColor(fallback);
     return c ? new TailwindColor(c) : null;
   }
@@ -82,33 +82,33 @@ export class TailwindService {
   }
 
   /** Returns true if the provided color is light */
-  isLight(color?: TWColor|null): boolean {
+  isLight(color?: TWNil<TWColor>): boolean {
     return this.resolve(color)?.isLight() || false;
   }
 
   /** Returns true if the provided color is dark */
-  isDark(color?: TWColor|null): boolean {
+  isDark(color?: TWNil<TWColor>): boolean {
     return this.resolve(color)?.isDark() || false;
   }
 
   /** Lighten a color by the provided amount */
-  lighten(color?: TWColor|null, amount?: number|null): TailwindColor|null {
+  lighten(color?: TWNil<TWColor>, amount?: TWNil<number>): TailwindColor|null {
     return this.resolve(color)?.lighten(amount ?? undefined) || null;
   }
 
   /** Darken a color by the provided amount */
-  darken(color?: TWColor|null, amount?: number|null): TailwindColor|null {
+  darken(color?: TWNil<TWColor>, amount?: TWNil<number>): TailwindColor|null {
     return this.resolve(color)?.darken(amount ?? undefined) || null;
   }
 
   /** Inverts a color */
-  invert(color?: TWColor|null, options?: Partial<TWInvertOptions>): TailwindColor|null {
+  invert(color?: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TailwindColor|null {
     return this.resolve(color)?.invert(options) || null;
   }
 
 }
 
-function parseColor(colorString?: TWColor|null): TinyColor|null {
+function parseColor(colorString?: TWNil<TWColor>): TinyColor|null {
   // check if the color is instanceof TailwindColor
   if(colorString instanceof TailwindColor) return colorString.tinyColor;
   // normalize color string
@@ -120,7 +120,7 @@ function parseColor(colorString?: TWColor|null): TinyColor|null {
   // parse opacity and set to 100 if null
   const opacity = rawOpacity && !isNaN(parseInt(rawOpacity)) ? parseInt(rawOpacity) : 100;
   // parse color
-  const color = tinyColor(getColor(TAILWIND_COLORS, rawColor) as any || rawColor);
+  const color = tinycolor(getColor(TAILWIND_COLORS, rawColor) as any || rawColor, {});
   // return null if the tinyColor instance is not valid
   if(!color.isValid()) return null;
   // set opacity

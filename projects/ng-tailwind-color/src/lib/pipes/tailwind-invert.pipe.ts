@@ -2,6 +2,7 @@ import {Optional, Pipe, PipeTransform} from "@angular/core";
 import {TWColor} from "../interfaces/tailwind-color.interface";
 import {getTailwindService, TailwindService} from "../services/tailwind.service";
 import {TWInvertOptions} from "../interfaces/tailwind-options.interface";
+import {TWNil} from "../interfaces/tailwind-internal.interface";
 
 @Pipe({ name: 'twInvertHex', pure: true })
 export class TailwindInvertHexPipe implements PipeTransform {
@@ -9,7 +10,7 @@ export class TailwindInvertHexPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, options?: Partial<TWInvertOptions>): TWColor|null {
+  transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
     return this.twService.invert(value, options)?.toHex() || null;
   }
 }
@@ -20,7 +21,7 @@ export class TailwindInvertRgbPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, options?: Partial<TWInvertOptions>): TWColor|null {
+  transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
     return this.twService.invert(value, options)?.toRgb() || null;
   }
 }
@@ -31,7 +32,7 @@ export class TailwindInvertHslPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, options?: Partial<TWInvertOptions>): TWColor|null {
+  transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
     return this.twService.invert(value, options)?.toHsl() || null;
   }
 }
@@ -42,7 +43,7 @@ export class TailwindInvertHsvPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, options?: Partial<TWInvertOptions>): TWColor|null {
+  transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
     return this.twService.invert(value, options)?.toHsv() || null;
   }
 }

@@ -1,6 +1,7 @@
 import {Optional, Pipe, PipeTransform} from "@angular/core";
 import {TWColor} from "../interfaces/tailwind-color.interface";
 import {getTailwindService, TailwindService} from "../services/tailwind.service";
+import {TWNil} from "../interfaces/tailwind-internal.interface";
 
 @Pipe({ name: 'twDarkenHex', pure: true })
 export class TailwindDarkenHexPipe implements PipeTransform {
@@ -8,7 +9,7 @@ export class TailwindDarkenHexPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, amount?: number|null): TWColor|null {
+  transform(value: TWNil<TWColor>, amount?: number|null): TWColor|null {
     return this.twService.darken(value, amount)?.toHex() || null;
   }
 }
@@ -19,7 +20,7 @@ export class TailwindDarkenRgbPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, amount?: number|null): TWColor|null {
+  transform(value: TWNil<TWColor>, amount?: number|null): TWColor|null {
     return this.twService.darken(value, amount)?.toRgb() || null;
   }
 }
@@ -30,7 +31,7 @@ export class TailwindDarkenHslPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, amount?: number|null): TWColor|null {
+  transform(value: TWNil<TWColor>, amount?: number|null): TWColor|null {
     return this.twService.darken(value, amount)?.toHsl() || null;
   }
 }
@@ -41,7 +42,7 @@ export class TailwindDarkenHsvPipe implements PipeTransform {
     @Optional() private twService: TailwindService = getTailwindService()
   ){}
 
-  transform(value: TWColor|null, amount?: number|null): TWColor|null {
+  transform(value: TWNil<TWColor>, amount?: number|null): TWColor|null {
     return this.twService.darken(value, amount)?.toHsv() || null;
   }
 }

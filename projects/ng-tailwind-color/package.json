@@ -1,6 +1,6 @@
 {
   "name": "@fusoionic/ng-tailwind-color",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "Angular helper functions/pipe for coloring (build on top of TinyColor2)",
   "author": "marxlnfcs",
   "homepage": "https://github.com/fusoionic/ng-tailwind-color#readme",
@@ -22,7 +22,7 @@
   "peerDependencies": {
     "@angular/common": ">= 14.0.0",
     "@angular/core": ">= 14.0.0",
-    "tinycolor2": "^1.6.0"
+    "@thebespokepixel/es-tinycolor": "^3.1.0"
   },
   "private": false,
   "dependencies": {},

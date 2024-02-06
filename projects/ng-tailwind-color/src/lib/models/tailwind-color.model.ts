@@ -1,4 +1,4 @@
-import tinyColor, {Instance as TinyColor} from 'tinycolor2';
+import {tinycolor, TinyColor} from '@thebespokepixel/es-tinycolor';
 import {TWColorOpacity} from "../interfaces/tailwind-color.interface";
 import {TWInvertOptions} from "../interfaces/tailwind-options.interface";
 
@@ -19,9 +19,9 @@ export class TailwindColor {
   /**
    * Get red / green / blue
    */
-  get red(): number { return this.tinyColor.toRgb().r }
-  get green(): number { return this.tinyColor.toRgb().g }
-  get blue(): number { return this.tinyColor.toRgb().b }
+  get red(): number { return (this.tinyColor.toRgb() as any).r }
+  get green(): number { return (this.tinyColor.toRgb() as any).g }
+  get blue(): number { return (this.tinyColor.toRgb() as any).b }
 
   /**
    * Returns the perceived brightness of the color, from 0-255.
@@ -130,7 +130,7 @@ export class TailwindColor {
    *  Default value: 30.
    */
   analogous(results?: number, slices?: number): TailwindColor[] {
-    return this.tinyColor.analogous(results, slices).map(c => new TailwindColor(c));
+    return (this.tinyColor.analogous(results, slices) as any[]).map(c => new TailwindColor(c));
   }
 
   /**
@@ -147,28 +147,28 @@ export class TailwindColor {
    *  Default value: 6.
    */
   monochromatic(results?: number): TailwindColor[] {
-    return this.tinyColor.monochromatic(results).map(c => new TailwindColor(c));
+    return (this.tinyColor.monochromatic(results) as any[]).map(c => new TailwindColor(c));
   }
 
   /**
    * Gets a split complement color scheme based off of the current color.
    */
   splitComplement(): [TailwindColor, TailwindColor, TailwindColor] {
-    return this.tinyColor.splitcomplement().map(c => new TailwindColor(c)) as any;
+    return (this.tinyColor.splitcomplement() as any[]).map(c => new TailwindColor(c)) as any;
   }
 
   /**
    * Gets a triad based off of the current color.
    */
   triad(): [TailwindColor, TailwindColor, TailwindColor] {
-    return this.tinyColor.triad().map(c => new TailwindColor(c)) as any;
+    return (this.tinyColor.triad() as any[]).map(c => new TailwindColor(c)) as any;
   }
 
   /**
    * Gets a tetrad based off of the current color.
    */
   tetrad(): [TailwindColor, TailwindColor, TailwindColor, TailwindColor] {
-    return this.tinyColor.tetrad().map(c => new TailwindColor(c)) as any;
+    return (this.tinyColor.tetrad() as any[]).map(c => new TailwindColor(c)) as any;
   }
 
   /**
@@ -183,7 +183,7 @@ export class TailwindColor {
    * Returns the hex value of the color -with a # appened.
    */
   toHex(): string {
-    return this.tinyColor.toHexString().trim().toLowerCase();
+    return this.tinyColor.toHexString(false).trim().toLowerCase();
   }
 
   /**
@@ -207,8 +207,8 @@ export class TailwindColor {
    */
   invert(options?: Partial<TWInvertOptions>): TailwindColor {
     const [colorLight, colorDark] = [
-      new TailwindColor(tinyColor(options?.light?.toString() || '#000000')),
-      new TailwindColor(tinyColor(options?.dark?.toString() || '#FFFFFF')),
+      new TailwindColor(tinycolor(options?.light?.toString() || '#000000', {})),
+      new TailwindColor(tinycolor(options?.dark?.toString() || '#FFFFFF', {})),
     ];
     return this.isDark() ? colorDark : colorLight;
   }
