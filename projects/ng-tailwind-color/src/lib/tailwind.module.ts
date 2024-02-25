@@ -19,6 +19,12 @@ import {
   TailwindLightenHsvPipe,
   TailwindLightenRgbPipe
 } from "./pipes/tailwind-lighten.pipe";
+import {
+  TailwindLoDHexPipe,
+  TailwindLoDHslPipe,
+  TailwindLoDHsvPipe,
+  TailwindLoDRgbPipe
+} from "./pipes/tailwind-lod.pipe";
 
 const declarations: Type<any>[] = [
   TailwindHexPipe,
@@ -40,6 +46,11 @@ const declarations: Type<any>[] = [
   TailwindDarkenRgbPipe,
   TailwindDarkenHslPipe,
   TailwindDarkenHsvPipe,
+
+  TailwindLoDHexPipe,
+  TailwindLoDRgbPipe,
+  TailwindLoDHslPipe,
+  TailwindLoDHsvPipe
 ];
 
 @NgModule({

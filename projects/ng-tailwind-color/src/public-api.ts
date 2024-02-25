@@ -7,5 +7,6 @@ export * from './lib/models/tailwind-color.model';
 export * from './lib/pipes/tailwind-darken.pipe';
 export * from './lib/pipes/tailwind-invert.pipe';
 export * from './lib/pipes/tailwind-lighten.pipe';
+export * from './lib/pipes/tailwind-lod.pipe';
 export * from './lib/pipes/tailwind-resolve.pipe';
 export * from './lib/services/tailwind.service';

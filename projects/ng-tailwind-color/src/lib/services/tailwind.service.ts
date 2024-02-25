@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {TAILWIND_COLORS} from "../data/tailwind-color.data";
 import {TWColorData, TWNil} from "../interfaces/tailwind-internal.interface";
 import {TinyColor, tinycolor} from "@thebespokepixel/es-tinycolor";
-import {TWColor, TWColorTone} from "../interfaces/tailwind-color.interface";
+import {TWColor, TWColorLoDAmount, TWColorTone} from "../interfaces/tailwind-color.interface";
 import {TWFindOptions, TWInvertOptions, TWRandomOptions} from "../interfaces/tailwind-options.interface";
 import {TailwindColor} from "../models/tailwind-color.model";
 
@@ -99,6 +99,12 @@ export class TailwindService {
   /** Darken a color by the provided amount */
   darken(color?: TWNil<TWColor>, amount?: TWNil<number>): TailwindColor|null {
     return this.resolve(color)?.darken(amount ?? undefined) || null;
+  }
+
+  /** Lighten or darkens a color by the provided amount */
+  lightenOrDarken(color?: TWNil<TWColor>, amount?: TWNil<TWColorLoDAmount>): TailwindColor|null {
+    const amounts = Array.isArray(amount) ? amount : [amount, amount];
+    return this.isLight(color) ? this.darken(color, amounts[1]) : this.lighten(color, amounts[0]);
   }
 
   /** Inverts a color */
