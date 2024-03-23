@@ -124,13 +124,15 @@ function parseColor(colorString?: TWNil<TWColor>): TinyColor|null {
   // split color into pieces
   const [rawColor, rawOpacity] = c.split('/');
   // parse opacity and set to 100 if null
-  const opacity = rawOpacity && !isNaN(parseInt(rawOpacity)) ? parseInt(rawOpacity) : 100;
+  const opacity = rawOpacity && !isNaN(parseInt(rawOpacity)) ? parseInt(rawOpacity) : null;
   // parse color
   const color = tinycolor(getColor(TAILWIND_COLORS, rawColor) as any || rawColor, {});
   // return null if the tinyColor instance is not valid
   if(!color.isValid()) return null;
   // set opacity
-  color.setAlpha(opacity);
+  if(opacity !== undefined && opacity !== null){
+    color.setAlpha(opacity / 100);
+  }
   // return tinyColor instance
   return color;
 }
