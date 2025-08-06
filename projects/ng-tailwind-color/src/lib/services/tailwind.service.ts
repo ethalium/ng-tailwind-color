@@ -44,8 +44,24 @@ export class TailwindService {
 
     // add colors
     this.colorNames.filter(name => opts.colors.includes(name)).map(name => {
-      (Object.keys(this.colors[name]) as unknown as TWColorTone[]).filter((tone) => this.colorTones.includes(parseInt(tone as any) as any)).map(tone => {
+      (Object.keys(this.colors[name]) as unknown as TWColorTone[]).map(tone => {
+
+        // convert tone to integer
+        tone = parseInt(tone as any) as any;
+
+        // check if tone is included in opts.tones
+        if(!opts.tones.includes(tone)){
+          return;
+        }
+
+        // skip if tone is not in range
+        if(tone < opts.minTone || tone > opts.maxTone){
+          return;
+        }
+
+        // add tone to array
         colors.push(new TailwindColor(tinycolor(this.colors[name][tone], {})));
+
       });
     });
 

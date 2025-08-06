@@ -1,16 +1,16 @@
 {
-  "name": "@fusoionic/ng-tailwind-color",
-  "version": "1.3.1",
+  "name": "@ethalium/ng-tailwind-color",
+  "version": "1.0.0",
   "description": "Angular helper functions/pipe for coloring (build on top of TinyColor2)",
   "author": "marxlnfcs",
-  "homepage": "https://github.com/fusoionic/ng-tailwind-color#readme",
+  "homepage": "https://github.com/ethalium/ng-tailwind-color#readme",
   "bugs": {
-    "url": "https://github.com/fusoionic/ng-tailwind-color/issues"
+    "url": "https://github.com/ethalium/ng-tailwind-color/issues"
   },
   "license": "GPL-3.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fusoionic/ng-tailwind-color.git"
+    "url": "git+https://github.com/ethalium/ng-tailwind-color.git"
   },
   "keywords": [
     "angular",

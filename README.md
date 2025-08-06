@@ -2,14 +2,14 @@
 
 <p align="center">Angular helper functions/pipe for coloring (build on top of TinyColor2)</p>
 <p align="center">
-    <a href="https://www.npmjs.com/package/@fusoionic/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/v/@fusoionic/ng-tailwind-color.svg" alt="NPM Version" /></a>
-    <a href="https://www.npmjs.com/package/@fusoionic/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/l/@fusoionic/ng-tailwind-color.svg" alt="Package License" /></a>
-    <a href="https://www.npmjs.com/package/@fusoionic/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/dm/@fusoionic/ng-tailwind-color.svg" alt="NPM Downloads" /></a>
-    <a href="https://www.npmjs.com/package/@fusoionic/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/bundlephobia/min/@fusoionic/ng-tailwind-color?label=size" alt="Package Size" /></a>
+    <a href="https://www.npmjs.com/package/@ethalium/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/v/@ethalium/ng-tailwind-color.svg" alt="NPM Version" /></a>
+    <a href="https://www.npmjs.com/package/@ethalium/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/l/@ethalium/ng-tailwind-color.svg" alt="Package License" /></a>
+    <a href="https://www.npmjs.com/package/@ethalium/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/npm/dm/@ethalium/ng-tailwind-color.svg" alt="NPM Downloads" /></a>
+    <a href="https://www.npmjs.com/package/@ethalium/ng-tailwind-color" target="_blank"><img src="https://img.shields.io/bundlephobia/min/@ethalium/ng-tailwind-color?label=size" alt="Package Size" /></a>
 </p>
 
 ## Installation
-`npm i @fusoionic/ng-tailwind-color`
+`npm i @ethalium/ng-tailwind-color`
 
 ## Usage
 
@@ -17,10 +17,10 @@
 
 #
 ### Module:
-Import `TailwindModule` from `@fusoionic/ng-tailwind-color`
+Import `TailwindModule` from `@ethalium/ng-tailwind-color`
 
 ```typescript
-import { TailwindModule } from '@fusoionic/ng-tailwind-color';
+import { TailwindModule } from '@ethalium/ng-tailwind-color';
 
 @NgModule({
   imports: [
@@ -41,7 +41,7 @@ Resolve color with pipe
 ```
 
 ```typescript
-import {TailwindService} from '@fusoionic/ng-tailwind-color';
+import {TailwindService} from '@ethalium/ng-tailwind-color';
 
 export class AppComponent implements OnInit {
     constructor(

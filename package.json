@@ -1,6 +1,6 @@
 {
-  "name": "@fusoionic/ng-tailwind-color",
-  "version": "1.3.1",
+  "name": "@ethalium/ng-tailwind-color",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

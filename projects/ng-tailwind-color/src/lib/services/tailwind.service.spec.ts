@@ -5,6 +5,11 @@ describe('TailwindService', () => {
   // get tailwind service
   const twService = getTailwindService();
 
+  // testing find
+  it('find should return 22 colors', () => {
+    expect(twService.find({ minTone: 50, maxTone: 50 }).length).toBe(22);
+  });
+
   // testing transparent keyword
   it('color "transparent" should return "rgba(0, 0, 0, 0)"', () => {
     expect(twService.resolve('transparent')?.toRgb()).toBe('rgba(0, 0, 0, 0)');
