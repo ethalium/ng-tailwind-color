@@ -3,7 +3,10 @@ import {TWColor} from "../interfaces/tailwind-color.interface";
 import {getTailwindService, TailwindService} from "../services/tailwind.service";
 import {TWNil} from "../interfaces/tailwind-internal.interface";
 
-@Pipe({ name: 'twHex', pure: true })
+@Pipe({
+    name: 'twHex', pure: true,
+    standalone: false
+})
 export class TailwindHexPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -14,7 +17,10 @@ export class TailwindHexPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twRgb', pure: true })
+@Pipe({
+    name: 'twRgb', pure: true,
+    standalone: false
+})
 export class TailwindRgbPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -25,7 +31,10 @@ export class TailwindRgbPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twHsl', pure: true })
+@Pipe({
+    name: 'twHsl', pure: true,
+    standalone: false
+})
 export class TailwindHslPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -36,7 +45,10 @@ export class TailwindHslPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twHsv', pure: true })
+@Pipe({
+    name: 'twHsv', pure: true,
+    standalone: false
+})
 export class TailwindHsvPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()

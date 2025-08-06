@@ -4,7 +4,10 @@ import {getTailwindService, TailwindService} from "../services/tailwind.service"
 import {TWInvertOptions} from "../interfaces/tailwind-options.interface";
 import {TWNil} from "../interfaces/tailwind-internal.interface";
 
-@Pipe({ name: 'twInvertHex', pure: true })
+@Pipe({
+    name: 'twInvertHex', pure: true,
+    standalone: false
+})
 export class TailwindInvertHexPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -15,7 +18,10 @@ export class TailwindInvertHexPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twInvertRgb', pure: true })
+@Pipe({
+    name: 'twInvertRgb', pure: true,
+    standalone: false
+})
 export class TailwindInvertRgbPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -26,7 +32,10 @@ export class TailwindInvertRgbPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twInvertHsl', pure: true })
+@Pipe({
+    name: 'twInvertHsl', pure: true,
+    standalone: false
+})
 export class TailwindInvertHslPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
@@ -37,7 +46,10 @@ export class TailwindInvertHslPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'twInvertHsv', pure: true })
+@Pipe({
+    name: 'twInvertHsv', pure: true,
+    standalone: false
+})
 export class TailwindInvertHsvPipe implements PipeTransform {
   constructor(
     @Optional() private twService: TailwindService = getTailwindService()
