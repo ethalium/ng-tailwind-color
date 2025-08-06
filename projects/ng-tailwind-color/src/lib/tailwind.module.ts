@@ -25,6 +25,7 @@ import {
   TailwindLoDHsvPipe,
   TailwindLoDRgbPipe
 } from "./pipes/tailwind-lod.pipe";
+import {TailwindDataService} from "./services/tailwind-data.service";
 
 const declarations: Type<any>[] = [
   TailwindHexPipe,
@@ -61,7 +62,7 @@ export class TailwindModule {
   static forRoot(): ModuleWithProviders<TailwindModule> {
     return {
       ngModule: TailwindModule,
-      providers: [TailwindService],
+      providers: [TailwindService, TailwindDataService],
     }
   }
 }

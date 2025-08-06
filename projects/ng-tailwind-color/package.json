@@ -1,7 +1,7 @@
 {
   "name": "@ethalium/ng-tailwind-color",
   "version": "1.0.0",
-  "description": "Angular helper functions/pipe for coloring (build on top of TinyColor2)",
+  "description": "Angular helper functions/pipe for coloring (build on top of culorijs)",
   "author": "marxlnfcs",
   "homepage": "https://github.com/ethalium/ng-tailwind-color#readme",
   "bugs": {
@@ -17,12 +17,15 @@
     "angular2",
     "grid",
     "html",
-    "web"
+    "web",
+    "colors",
+    "color",
+    "css"
   ],
   "peerDependencies": {
-    "@angular/common": ">= 14.0.0",
-    "@angular/core": ">= 14.0.0",
-    "@thebespokepixel/es-tinycolor": "^3.1.0"
+    "@angular/common": ">= 20.1.4",
+    "@angular/core": ">= 20.1.4",
+    "culori": "^4.0.2"
   },
   "private": false,
   "dependencies": {},

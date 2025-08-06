@@ -1,7 +1,24 @@
 import {TWColorData} from "../interfaces/tailwind-internal.interface";
 
-/** @internal */
-export const TAILWIND_COLORS: TWColorData = {
+/**
+ * A data structure representing version 3 of the Tailwind CSS color palette.
+ * Includes named color families mapped to their respective shades and hex color codes.
+ * Each named color family contains multiple shades ranging from 50 to 950,
+ * providing a sequential intensity of the color.
+ *
+ * Variable Name: TAILWIND_COLORS_V3
+ * Type: TWColorData
+ *
+ * Key Features:
+ * - Represents Tailwind CSS version 3 color palette.
+ * - Provides color families such as "slate", "gray", "zinc", "neutral", "stone", "red", "orange",
+ *   "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", etc.
+ * - Each color family contains shades defined by numerical keys (e.g., 50, 100, 200, up to 950).
+ * - Each numerical key maps to a hex color code representing the associated color shade.
+ *
+ * @internal
+ */
+export const TAILWIND_COLORS_V3: TWColorData = {
   "slate": {
     50: "#f8fafc",
     100: "#f1f5f9",

@@ -1,224 +1,157 @@
-import {tinycolor, TinyColor} from '@thebespokepixel/es-tinycolor';
 import {TWColorOpacity} from "../interfaces/tailwind-color.interface";
 import {TWInvertOptions} from "../interfaces/tailwind-options.interface";
+import {createColor} from "../utils/color.util";
+import {converter, formatCss, formatHex, formatHex8, formatHsl, formatRgb, Mode, wcagLuminance} from "culori";
+import {FindColorByMode} from "culori/require";
 
-export class TailwindColor {
-  /** @internal */
-  constructor(public readonly tinyColor: TinyColor) {}
+/**
+ * Represents a powerful utility class for managing and manipulating colors
+ * with TailwindCSS and TinyColor. Provides additional functionality for
+ * color manipulation such as changing brightness, saturation, and generating
+ * various color schemes.
+ */
+export class TailwindColor<M extends Mode = 'rgb'> {
+  constructor(
+    private _color: FindColorByMode<M>,
+  ) {}
 
   /**
-   * Return an indication whether the color's perceived brightness is dark.
+   * Retrieves the current color mode.
+   *
+   * @return {FindColorByMode<Mode>} The color determined by the active mode.
    */
-  isDark(): boolean { return this.tinyColor.isDark() }
+  get color(): FindColorByMode<M> {
+    return this._color;
+  }
 
   /**
-   * Return an indication whether the color's perceived brightness is light.
+   * Determines if the current color is perceived as dark.
+   *
+   * @return {boolean} Returns true if the color is dark, otherwise false.
    */
-  isLight(): boolean { return this.tinyColor.isLight() }
+  isDark(): boolean {
+    return this.luminance < 0.5;
+  }
 
   /**
-   * Get red / green / blue
+   * Determines if the current color is considered "light" based on its luminance.
+   *
+   * @return {boolean} True if the color is light, otherwise false.
    */
-  get red(): number { return (this.tinyColor.toRgb() as any).r }
-  get green(): number { return (this.tinyColor.toRgb() as any).g }
-  get blue(): number { return (this.tinyColor.toRgb() as any).b }
+  isLight(): boolean {
+    return this.luminance >= 0.5;
+  }
 
   /**
-   * Returns the perceived brightness of the color, from 0-255.
+   * Retrieves the luminance value of the color.
+   *
+   * The luminance is a measure of the brightness or lightness of the color.
+   *
+   * @return {number} A value between 0 and 1 representing the luminance, where 0 is darkest (black) and 1 is brightest (white).
    */
-  get brightness(): number { return this.tinyColor.getBrightness() }
+  get luminance(): number {
+    return wcagLuminance(this.color);
+  }
 
   /**
-   * Returns the perceived luminance of a color, from 0-1.
+   * Retrieves the alpha (opacity) value of the color.
+   *
+   * @return {number} The alpha value as a number between 0 (completely transparent) and 1 (completely opaque).
    */
-  get luminance(): number { return this.tinyColor.getLuminance() }
+  get alpha(): number {
+    return this.color.alpha ?? 1;
+  }
 
   /**
-   * Returns the alpha value of the color
-   */
-  get alpha(): number { return this.tinyColor.getAlpha(); }
-
-  /**
-   * Sets the alpha value on the current color.
+   * Sets the alpha (opacity) value for the color.
+   *
+   * @param {TWColorOpacity} alpha - The alpha value to set, represented as a percentage (0-100).
+   * @return {this} The current instance for method chaining.
    */
   setAlpha(alpha: TWColorOpacity): this {
-    this.tinyColor.setAlpha(alpha / 100);
+    this.color.alpha = alpha / 100;
     return this;
   }
 
   /**
-   * Brighten the color a given amount.
+   * Adjusts the lightness of the color by a specified value. If no value is provided, the lightness remains unchanged.
    *
-   * @param amount - The amount to brighten by. The valid range is 0 to 100.
-   *  Default value: 10.
+   * @param {number|null} [lightness] - The adjustment value for the lightness. If undefined or null, no adjustment is made.
+   * @return {this} The current instance with the updated lightness value.
    */
-  brighten(amount?: number): this {
-    this.tinyColor.brighten(amount);
+  setLightness(lightness?: number|null): this {
+    if(lightness !== undefined && lightness !== null){
+      const c = converter('oklch')(this.color);
+      c.l = Math.max(0, Math.min(1, lightness));
+      this._color = converter(this.color.mode)(c);
+    }
     return this;
   }
 
   /**
-   * Lighten the color a given amount. Providing 100 will always return white.
+   * Lightens the current color by the specified amount.
    *
-   * @param amount - The amount to lighten by. The valid range is 0 to 100.
-   *  Default value: 10.
+   * @param {number} [amount] - The amount to lighten the color. If no value is provided, a default value will be used.
+   * @return {this} The instance with the lightened color.
    */
   lighten(amount?: number): this {
-    this.tinyColor.lighten(amount);
+    if(amount !== undefined && amount !== null){
+      const c = converter('oklch')(this.color);
+      this.setLightness(c.l + amount)
+    }
     return this;
   }
 
   /**
-   * Darken the color a given amount.
-   *  Providing 100 will always return black.
+   * Darkens the current color by a specified amount.
    *
-   * @param amount - The amount to darken by. The valid range is 0 to 100.
-   *  Default value: 10.
+   * @param {number} [amount] - The amount by which to darken the color. If not specified, a default value may be used.
+   * @return {this} The current instance with the updated color.
    */
   darken(amount?: number): this {
-    this.tinyColor.darken(amount);
+    if(amount !== undefined && amount !== null){
+      const c = converter('oklch')(this.color);
+      this.setLightness(c.l - amount)
+    }
     return this;
   }
 
   /**
-   * Desaturate the color a given amount.
-   *  Providing 100 will is the same as calling greyscale.
+   * Inverts the current color based on whether it is dark or light.
    *
-   * @param amount - The amount to desaturate by. The valid range is 0 to 100.
-   *  Default value: 10.
-   */
-  desaturate(amount?: number): this {
-    this.tinyColor.desaturate(amount);
-    return this;
-  }
-
-  /**
-   * Saturate the color a given amount.
-   *
-   * @param amount - The amount to saturate by. The valid range is 0  to 100.
-   *  Default value: 10.
-   */
-  saturate(amount?: number): this {
-    this.tinyColor.saturate(amount);
-    return this;
-  }
-
-
-  /**
-   * Completely desaturates a color into greyscale.
-   * Same as calling desaturate(100).
-   */
-  greyscale(): TailwindColor {
-    return new TailwindColor(this.tinyColor.greyscale());
-  }
-
-  /**
-   * Spin the hue a given amount. Calling with 0, 360, or -360 will do nothing.
-   *
-   * @param amount - The amount to spin by. The valid range is -360 to 360.
-   */
-  spin(amount: number): TailwindColor {
-    return new TailwindColor(this.tinyColor.spin(amount));
-  }
-
-  /**
-   * Gets an analogous color scheme based off of the current color.
-   *
-   * @param results - The amount of results to return.
-   *  Default value: 6.
-   * @param slices - The amount to slice the input color by.
-   *  Default value: 30.
-   */
-  analogous(results?: number, slices?: number): TailwindColor[] {
-    return (this.tinyColor.analogous(results, slices) as any[]).map(c => new TailwindColor(c));
-  }
-
-  /**
-   * Gets the complement of the current color
-   */
-  complement(): TailwindColor {
-    return new TailwindColor(this.tinyColor.complement());
-  }
-
-  /**
-   * Gets a monochromatic color scheme based off of the current color.
-   *
-   * @param results - The amount of results to return.
-   *  Default value: 6.
-   */
-  monochromatic(results?: number): TailwindColor[] {
-    return (this.tinyColor.monochromatic(results) as any[]).map(c => new TailwindColor(c));
-  }
-
-  /**
-   * Gets a split complement color scheme based off of the current color.
-   */
-  splitComplement(): [TailwindColor, TailwindColor, TailwindColor] {
-    return (this.tinyColor.splitcomplement() as any[]).map(c => new TailwindColor(c)) as any;
-  }
-
-  /**
-   * Gets a triad based off of the current color.
-   */
-  triad(): [TailwindColor, TailwindColor, TailwindColor] {
-    return (this.tinyColor.triad() as any[]).map(c => new TailwindColor(c)) as any;
-  }
-
-  /**
-   * Gets a tetrad based off of the current color.
-   */
-  tetrad(): [TailwindColor, TailwindColor, TailwindColor, TailwindColor] {
-    return (this.tinyColor.tetrad() as any[]).map(c => new TailwindColor(c)) as any;
-  }
-
-  /**
-   * Returns the hsva values interpolated into a string with the following format:
-   * "hsva(xxx, xxx, xxx, xx)".
-   */
-  toHsv(): string {
-    return this.tinyColor.toHsvString().trim().toLowerCase();
-  }
-
-  /**
-   * Returns the hex value of the color -with a # appened.
-   */
-  toHex(): string {
-    return this.tinyColor.toHexString(false).trim().toLowerCase();
-  }
-
-  /**
-   * Returns the RGBA values interpolated into a string with the following format:
-   * "RGBA(xxx, xxx, xxx, xx)".
-   */
-  toRgb(): string {
-    return this.tinyColor.toRgbString().trim().toLowerCase();
-  }
-
-  /**
-   * Returns the hsla values interpolated into a string with the following format:
-   * "hsla(xxx, xxx, xxx, xx)".
-   */
-  toHsl(): string {
-    return this.tinyColor.toHslString().trim().toLowerCase();
-  }
-
-  /**
-   * Inverts the current color
+   * @param {Partial<TWInvertOptions>} [options] Optional parameter to specify custom light and dark colors.
+   * @return {TailwindColor} Returns the inverted color as a TailwindColor object.
    */
   invert(options?: Partial<TWInvertOptions>): TailwindColor {
-    const [colorLight, colorDark] = [
-      new TailwindColor(tinycolor(options?.light?.toString() || '#000000', {})),
-      new TailwindColor(tinycolor(options?.dark?.toString() || '#FFFFFF', {})),
-    ];
+    const colorLight = new TailwindColor(createColor(options?.light?.toString()) || createColor('#000000') as any);
+    const colorDark = new TailwindColor(createColor(options?.dark?.toString()) || createColor('#FFFFFF') as any);
     return this.isDark() ? colorDark : colorLight;
   }
 
   /**
-   * Returns the RGBA values interpolated into a string with the following format:
-   * "RGBA(xxx, xxx, xxx, xx)".
+   * Converts the current color instance to the specified mode.
+   *
+   * @param {Mode} mode - The target color mode to convert to.
+   * @return {TailwindColor} A new TailwindColor instance in the specified mode.
    */
-  toString(): string {
-    return this.toRgb();
+  toMode<M extends Mode>(mode: M): TailwindColor<M> {
+    return new TailwindColor(converter(mode)(this.color));
+  }
+
+  /**
+   * Converts the given mode to a string representation.
+   *
+   * @param {Mode} mode - The mode to be converted to a string.
+   * @return {string} A string representation of the provided mode.
+   */
+  toString<M extends Mode>(mode?: M|'hex'|'hex8'|null): string {
+    switch(mode || this.color.mode){
+      case 'hex': return formatHex(this.color);
+      case 'hex8': return formatHex8(this.color);
+      case 'rgb': return formatRgb(this.color);
+      case 'hsl': return formatHsl(this.color);
+      default: return formatCss(mode ? converter(mode as any)(this.color) : this.color);
+    }
   }
 
 }

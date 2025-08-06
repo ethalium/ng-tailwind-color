@@ -19,7 +19,7 @@
     "@angular/platform-browser": "^20.1.4",
     "@angular/platform-browser-dynamic": "^20.1.4",
     "@angular/router": "^20.1.4",
-    "@thebespokepixel/es-tinycolor": "^3.1.0",
+    "culori": "^4.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"
@@ -28,6 +28,7 @@
     "@angular/build": "^20.1.4",
     "@angular/cli": "^20.1.4",
     "@angular/compiler-cli": "^20.1.4",
+    "@types/culori": "^4.0.0",
     "@types/jasmine": "~5.1.0",
     "barrelsby": "^2.8.1",
     "jasmine-core": "~5.1.0",

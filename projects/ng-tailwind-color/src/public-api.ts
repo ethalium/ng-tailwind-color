@@ -1,5 +1,6 @@
 export * from './lib/tailwind.module';
-export * from './lib/data/tailwind-color.data';
+export * from './lib/data/tailwind-color-v3.data';
+export * from './lib/data/tailwind-color-v4.data';
 export * from './lib/interfaces/tailwind-color.interface';
 export * from './lib/interfaces/tailwind-internal.interface';
 export * from './lib/interfaces/tailwind-options.interface';
@@ -9,4 +10,6 @@ export * from './lib/pipes/tailwind-invert.pipe';
 export * from './lib/pipes/tailwind-lighten.pipe';
 export * from './lib/pipes/tailwind-lod.pipe';
 export * from './lib/pipes/tailwind-resolve.pipe';
+export * from './lib/services/tailwind-data.service';
 export * from './lib/services/tailwind.service';
+export * from './lib/utils/color.util';
