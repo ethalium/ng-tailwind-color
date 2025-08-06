@@ -144,10 +144,9 @@ export class TailwindColor<M extends Mode = 'rgb'> {
    * @param {Mode} mode - The mode to be converted to a string.
    * @return {string} A string representation of the provided mode.
    */
-  toString<M extends Mode>(mode?: M|'hex'|'hex8'|null): string {
+  toString<M extends Mode>(mode?: M|'hex'|null): string {
     switch(mode || this.color.mode){
-      case 'hex': return formatHex(this.color);
-      case 'hex8': return formatHex8(this.color);
+      case 'hex': return this.alpha < 1 ? formatHex8(this.color) : formatHex(this.color);
       case 'rgb': return formatRgb(this.color);
       case 'hsl': return formatHsl(this.color);
       default: return formatCss(mode ? converter(mode as any)(this.color) : this.color);

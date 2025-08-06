@@ -13,7 +13,7 @@ export class TailwindHexPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, fallback?: TWColor|null): TWColor|null {
-    return this.twService.resolve(value, fallback)?.toHex() || null;
+    return this.twService.resolve(value, fallback)?.toString('hex') || null;
   }
 }
 
@@ -27,7 +27,7 @@ export class TailwindRgbPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, fallback?: TWColor|null): TWColor|null {
-    return this.twService.resolve(value, fallback)?.toRgb() || null;
+    return this.twService.resolve(value, fallback)?.toString('rgb') || null;
   }
 }
 
@@ -41,7 +41,7 @@ export class TailwindHslPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, fallback?: TWColor|null): TWColor|null {
-    return this.twService.resolve(value, fallback)?.toHsl() || null;
+    return this.twService.resolve(value, fallback)?.toString('hsl') || null;
   }
 }
 
@@ -55,6 +55,6 @@ export class TailwindHsvPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, fallback?: TWColor|null): TWColor|null {
-    return this.twService.resolve(value, fallback)?.toHsv() || null;
+    return this.twService.resolve(value, fallback)?.toString('hsv') || null;
   }
 }

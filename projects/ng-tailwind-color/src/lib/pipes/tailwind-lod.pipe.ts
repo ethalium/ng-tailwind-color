@@ -13,7 +13,7 @@ export class TailwindLoDHexPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, amount?: TWColorLoDAmount|null): TWColor|null {
-    return this.twService.lightenOrDarken(value, amount)?.toHex() || null;
+    return this.twService.lightenOrDarken(value, amount)?.toString('hex') || null;
   }
 }
 
@@ -27,7 +27,7 @@ export class TailwindLoDRgbPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, amount?: TWColorLoDAmount|null): TWColor|null {
-    return this.twService.lightenOrDarken(value, amount)?.toRgb() || null;
+    return this.twService.lightenOrDarken(value, amount)?.toString('rgb') || null;
   }
 }
 
@@ -41,7 +41,7 @@ export class TailwindLoDHslPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, amount?: TWColorLoDAmount|null): TWColor|null {
-    return this.twService.lightenOrDarken(value, amount)?.toHsl() || null;
+    return this.twService.lightenOrDarken(value, amount)?.toString('hsl') || null;
   }
 }
 
@@ -56,6 +56,6 @@ export class TailwindLoDHsvPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, amount?: TWColorLoDAmount|null): TWColor|null {
-    return this.twService.lightenOrDarken(value, amount)?.toHsv() || null;
+    return this.twService.lightenOrDarken(value, amount)?.toString('hsv') || null;
   }
 }

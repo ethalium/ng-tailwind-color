@@ -14,7 +14,7 @@ export class TailwindInvertHexPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
-    return this.twService.invert(value, options)?.toHex() || null;
+    return this.twService.invert(value, options)?.toString('hex') || null;
   }
 }
 
@@ -28,7 +28,7 @@ export class TailwindInvertRgbPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
-    return this.twService.invert(value, options)?.toRgb() || null;
+    return this.twService.invert(value, options)?.toString('rgb') || null;
   }
 }
 
@@ -42,7 +42,7 @@ export class TailwindInvertHslPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
-    return this.twService.invert(value, options)?.toHsl() || null;
+    return this.twService.invert(value, options)?.toString('hsl') || null;
   }
 }
 
@@ -56,6 +56,6 @@ export class TailwindInvertHsvPipe implements PipeTransform {
   ){}
 
   transform(value: TWNil<TWColor>, options?: Partial<TWInvertOptions>): TWColor|null {
-    return this.twService.invert(value, options)?.toHsv() || null;
+    return this.twService.invert(value, options)?.toString('hsv') || null;
   }
 }
