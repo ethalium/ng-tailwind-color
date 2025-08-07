@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     ){}
   
     ngOnInit(){
-      this.twService.resolve('red-500').darken(50).toHex();
+      this.twService.resolve('red-500').darken(50).toString('hex');
     }
 }
 
