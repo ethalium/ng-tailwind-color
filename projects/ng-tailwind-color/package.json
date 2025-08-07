@@ -1,6 +1,6 @@
 {
   "name": "@ethalium/ng-tailwind-color",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Angular helper functions/pipe for coloring (build on top of culorijs)",
   "author": "marxlnfcs",
   "homepage": "https://github.com/ethalium/ng-tailwind-color#readme",
@@ -25,9 +25,7 @@
   "peerDependencies": {
     "@angular/common": ">= 20.1.4",
     "@angular/core": ">= 20.1.4",
-    "culori": "^4.0.2"
-  },
-  "devDependencies": {
+    "culori": "^4.0.2",
     "@types/culori": "^4.0.0"
   },
   "private": false,
