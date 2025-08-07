@@ -25,9 +25,9 @@
     "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.4",
-    "@angular/cli": "^20.1.4",
-    "@angular/compiler-cli": "^20.1.4",
+    "@angular/build": ">=20.1.4",
+    "@angular/cli": ">=20.1.4",
+    "@angular/compiler-cli": ">=20.1.4",
     "@types/culori": "^4.0.0",
     "@types/jasmine": "~5.1.0",
     "barrelsby": "^2.8.1",
